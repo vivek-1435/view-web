@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Video Embed</title>
+     <!-- font awesome cdn link  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+     <!-- custom css file link  -->
+     <link rel="stylesheet" href="style.css">
+  
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #8e44ad;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .video-container {
+      margin-top: 20px;
+      width: 640px;
+      height: 360px;
+      background-color: #ded2d2;
+      border: 1px solid #ccc;
+      position: relative;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .input-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .input-field {
+      width: 500px;
+      padding: 10px;
+      border: 1px solid #974242;
+    }
+
+    .add-button {
+      padding: 10px;
+      border: 1px solid #4c2020;
+      cursor: pointer;
+    }
+
+    .videos-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .videos-container .video-container {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .videos-container .video-container iframe {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  
+  <header class="header">
+   
+    <section class="flex">
+ 
+       <a href="index.html" class="logo">Prime.LMS</a>
+ 
+       <form action="search.html" method="post" class="search-form">
+          <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+          <button type="submit" class="fas fa-search"></button>
+       </form>
+ 
+       <div class="icons">
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+         
+       </div>
+ 
+       <div class="profile">
+          <img src="pic-1.jpg" class="image" alt="">
+          <h3 class="name">Himanshu</h3>
+          <p class="role">student</p>
+          <a href="profile.html" class="btn">view profile</a>
+          <div class="flex-btn">
+             <a href="login.html" class="option-btn">login</a>
+             <a href="register.html" class="option-btn">register</a>
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ <div class="side-bar">
+
+  <div id="close-btn">
+     <i class="fas fa-times"></i>
+  </div>
+
+  <div class="profile">
+     <img src="pic-1.jpg" class="image" alt="">
+     <h3 class="name">Himanshu</h3>
+     <p class="role">student</p>
+     <a href="profile.html" class="btn">view profile</a>
+  </div>
+
+  <nav class="navbar">
+     <a href="index.html"><i class="fas fa-home"></i><span>home</span></a>
+     <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+     <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+     <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+     <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+  </nav>
+
+</div>
+
+
+  <div class="container">
+    <h1>Add your content from  YouTube </h1>
+
+    <div class="videos-container">
+      </div>
+
+    <div class="input-container">
+      <input type="text" class="input-field" id="video-url" placeholder="Paste YouTube video URL">
+      <button class="add-button" id="add-button">Add Video</button>
+    </div>
+  </div>
+
+  <script>
+    const videoUrlInput = document.getElementById('video-url');
+    const addButton = document.getElementById('add-button');
+    const videosContainer = document.querySelector('.videos-container');
+
+    let videoList = []; // Array to store video URLs
+
+    addButton.addEventListener('click', () => {
+      const videoURL = videoUrlInput.value;
+
+      if (!videoURL) {
+        return;
+      }
+
+      // Extract video ID
+      const videoID = extractVideoID(videoURL);
+
+      // Create a new video container
+      const videoContainer = document.createElement('div');
+      videoContainer.classList.add('video-container');
+
+      // Create an iframe element
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoID}`;
+      iframe.width = 640;
+      iframe.height = 360;
+      iframe.frameborder = 0;
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+
+      // Append iframe to the video container
+      videoContainer.appendChild(iframe);
+
+      // Add the video container to the videos container
+      videosContainer.appendChild(videoContainer);
+
+      // Add the video URL to the video list
+      videoList.push(videoURL);
+
+      // Clear the input field
+      videoUrlInput.value = '';
+    });
+
+    function extractVideoID(videoURL) {
+      const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+      const match = videoURL.match(regExp);
+
+      if (match && match[1]) {
+        return match[1];
+      }
+
+      return '';
+    }
+  </script>
+
+ 
+ <!-- custom js file link  -->
+ <script src="script.js"></script>
+</body>
+</html>
+
+     

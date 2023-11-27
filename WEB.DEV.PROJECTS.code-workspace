@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../../../Dropbox/My PC (DESKTOP-9MNL3H7)/2.1+Heading+Element/2.1 Heading Element"
+        },
+        {
+            "path": "../../../Dropbox/My PC (DESKTOP-9MNL3H7/2.2+Paragraph+Element/2.2 Paragraph Element"
+        }
+    ],
+    "extensions": {
+        "recommendations": [
+            "franneck94.c-cpp-runner"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": []
+    }
+}
